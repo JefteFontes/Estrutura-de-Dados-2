@@ -136,7 +136,7 @@ void bfs(Grafo* g, int inicio, int distancia[], int predecessor[]) {
             int vizinho = temp->cidade;
             if (!visitado[vizinho]) { // Se o vizinho ainda não foi visitado
                 visitado[vizinho] = true; // Marca o vizinho como visitado
-                distancia[vizinho] = distancia[atual] + 1; // Atualiza a distância
+                distancia[vizinho] = distancia[atual] + 1; // Atualiza a distância 
                 predecessor[vizinho] = atual; // Define o predecessor
                 fila[tras++] = vizinho; // Adiciona o vizinho à fila
             }
