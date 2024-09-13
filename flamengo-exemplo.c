@@ -313,6 +313,26 @@ void inorder(Node* node) {
 }
 
 // Menu principal
+void printTree(Node* root, int space, int height) {
+    if (root == NIL) return;
+
+    space += height;
+
+    printTree(root->right, space, height);
+
+    printf("\n");
+    for (int i = height; i < space; i++)
+        printf(" ");
+    printf("%d(%s)\n", root->data, root->color);
+
+    printTree(root->left, space, height);
+}
+
+void visualTree() {
+    printf("\nVisual Tree Representation:\n");
+    printTree(root, 0, 10);
+}
+
 void menu() {
     int option, value;
 
@@ -355,15 +375,17 @@ void menu() {
                 inorder(root);
                 printf("\n");
                 break;
-
             case 5:
+                visualTree();
+                break;
+            case 6:
                 printf("Saindo...\n");
                 break;
 
             default:
                 printf("Opcao invalida.\n");
         }
-    } while (option != 5);
+    } while (option != 6);
 }
 
 // Função principal
