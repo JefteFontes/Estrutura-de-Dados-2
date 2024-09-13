@@ -342,7 +342,8 @@ void menu() {
         printf("2. Buscar valor\n");
         printf("3. Excluir valor\n");
         printf("4. Mostrar árvore in-order\n");
-        printf("5. Sair\n");
+        printf("5. Visualizar árvore\n");
+        printf("6. Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &option);
 
