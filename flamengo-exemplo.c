@@ -126,7 +126,7 @@ void insert(int data) {
         root = newNode;
     } else if (newNode->data < parent->data) {
         parent->left = newNode;
-    } else {
+    } else {    
         parent->right = newNode;
     }
 
@@ -154,10 +154,10 @@ void transplant(Node* u, Node* v) {
     v->parent = u->parent;
 }
 
-// Função auxiliar para encontrar o mínimo da subárvore
-Node* treeMinimum(Node* node) {
-    while (node->left != NIL) {
-        node = node->left;
+// Função auxiliar para encontrar o menor valor mais proximo da raiz da árvore
+Node* treeMinimum(Node* node) { 
+    while (node->right != NIL) {
+        node = node->right;
     }
     return node;
 }
@@ -237,21 +237,22 @@ void deleteNode(Node* z) {
         x = z->left;
         transplant(z, z->left);
     } else {
-        y = treeMinimum(z->right);
+        // Substituir pelo predecessor
+        y = treeMinimum(z->left); // Encontrar o predecessor
         strcpy(yOriginalColor, y->color);
-        x = y->right;
+        x = y->left;
 
         if (y->parent == z) {
             x->parent = y;
         } else {
-            transplant(y, y->right);
-            y->right = z->right;
-            y->right->parent = y;
+            transplant(y, y->left);
+            y->left = z->left;
+            y->left->parent = y;
         }
 
         transplant(z, y);
-        y->left = z->left;
-        y->left->parent = y;
+        y->right = z->right;
+        y->right->parent = y;
         strcpy(y->color, z->color);
     }
 
@@ -263,8 +264,11 @@ void deleteNode(Node* z) {
 // Função para deletar pelo valor
 void deleteValue(int data) {
     Node* z = root;
-    while (z != NIL && z->data != data) {
-        if (data < z->data) {
+    while (z != NIL) {
+        if (data == z->data) {
+            deleteNode(z); // Chama a função de exclusão
+            break; // Interrompe após encontrar o nó
+        } else if (data < z->data) {
             z = z->left;
         } else {
             z = z->right;
@@ -273,10 +277,7 @@ void deleteValue(int data) {
 
     if (z == NIL) {
         printf("Valor nao encontrado.\n");
-        return;
     }
-
-    deleteNode(z);
 }
 
 // Função para buscar um nó pelo valor
