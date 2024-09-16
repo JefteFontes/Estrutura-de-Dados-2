@@ -17,6 +17,17 @@ typedef struct Node {
 Node* root;
 Node* NIL; // Nó NIL (nó folha vazio)
 
+// Função para inicializar a árvore Red-Black
+void initialize() {
+    NIL = (Node*)malloc(sizeof(Node));
+    NIL->data = 0;
+    NIL->color = BLACK;
+    NIL->left = NULL;
+    NIL->right = NULL;
+    NIL->parent = NULL;
+    root = NIL;
+}
+
 // Função para criar um novo nó
 Node* createNode(int data) {
     Node* newNode = (Node*)malloc(sizeof(Node));
@@ -293,17 +304,6 @@ Node* search(int data) {
     return current;
 }
 
-// Função para inicializar a árvore Red-Black
-void initialize() {
-    NIL = (Node*)malloc(sizeof(Node));
-    NIL->data = 0;
-    NIL->color = BLACK;
-    NIL->left = NULL;
-    NIL->right = NULL;
-    NIL->parent = NULL;
-    root = NIL;
-}
-
 // Função para imprimir a cor do nó
 const char* getColor(Color color) {
     return (color == RED) ? "RED" : "BLACK";
@@ -335,7 +335,7 @@ void printTree(Node* root, int space, int height) {
 }
 
 void visualTree() {
-    printf("\nVisual Tree Representation:\n");
+    printf("\nArvore RB Visual:\n");
     printTree(root, 0, 10);
 }
 
@@ -349,8 +349,8 @@ void menu() {
         printf("1. Inserir valor\n");
         printf("2. Buscar valor\n");
         printf("3. Excluir valor\n");
-        printf("4. Mostrar árvore in-order\n");
-        printf("5. Visualizar árvore\n");
+        printf("4. Mostrar arvore in-order\n");
+        printf("5. Visualizar arvore\n");
         printf("6. Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &option);
@@ -382,7 +382,7 @@ void menu() {
                 break;
 
             case 4:
-                printf("Árvore in-order: ");
+                printf("Arvore in-order: ");
                 inorder(root);
                 printf("\n");
                 break;
